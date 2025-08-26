@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  pending
+  processing
+  shipped
+  delivered
+  cancelled
+}
+
+model User {
+  id        String          @id @default(uuid())
+  username  String          @unique
+  email     String          @unique
+  password  String
+  role      Role            @default(USER)
+  comments  Comment[]
+  orders    Order_details[]
+  wishLists WishList[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  carts     Cart[]
+}
+
+model Product {
+  id               String          @id @default(uuid())
+  title            String
+  description      String
+  image            String[]
+  mainCategory     String
+  subCategory      String
+  productType      String
+  brand            String
+  size             String[]
+  price            Float
+  discount         Float?
+  rating           Int?            @default(0)
+  reviews          Comment[]
+  wishLists        WishList[]
+  totalReviewCount Int?
+  orders           Order_details[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  carts            Cart[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Order_details {
+  id           String    @id @default(uuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id])
+  productId    String
+  product      Product   @relation(fields: [productId], references: [id])
+  productImage String
+  price        Float
+  quantity     Int
+  totalPrice   Float?
+  isPayed      Boolean   @default(false)
+  payedAt      DateTime?
+  isDelivered  Boolean   @default(false)
+  deliveredAt  DateTime?
+  orderStatus  Status    @default(pending)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model WishList {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  cratedAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
