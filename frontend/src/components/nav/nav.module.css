@@ -1,0 +1,24 @@
+.search {
+  width: 18vw;
+  height: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.input {
+  height: 100%;
+  text-align: center;
+  border: 0;
+  outline: 0;
+  transition: all ease 0.4s;
+  width: 8vw;
+  &:focus {
+    border-radius: 0.5rem;
+    border: 1px solid #c5c5c5;
+    width: 100%;
+  }
+}
+
+.input::placeholder {
+  color: #303030;
+}
