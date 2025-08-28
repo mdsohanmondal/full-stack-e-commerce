@@ -2,11 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import style from './nav.module.css';
-import { usePathname } from 'next/navigation';
-
 const NavBar = () => {
-  const pathname = usePathname();
-  console.log(pathname);
   const linksArray = [
     { href: '/ ', text: 'Home' },
     { href: '/', text: 'Men' },
@@ -14,6 +10,7 @@ const NavBar = () => {
     { href: '/', text: 'Kids' },
     { href: '/collections', text: 'Collections' },
     { href: '/', text: 'Contact' },
+    { href: '/admin', text: 'Dashboard' },
   ];
   return (
     <nav className="w-full h-15 px-5 shadow-md fixed top-0 left-0 z-50 flex items-center justify-center gap-10 bg-[#ffffff6b] backdrop-blur-xl">
