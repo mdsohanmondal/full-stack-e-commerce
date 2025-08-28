@@ -7,10 +7,7 @@ import { usePathname } from 'next/navigation';
 const SideBar = () => {
   const pathname = usePathname();
   return (
-    <aside
-      hidden={pathname !== '/collections'}
-      className="w-56 h-screen  fixed top-32 left-0"
-    >
+    <aside className="w-56 h-screen  fixed top-32 left-0">
       <div className="px-8 font-semibold ">
         {/* demand */}
         <div className="demand border-b border-zinc-300 pb-8 mb-3">

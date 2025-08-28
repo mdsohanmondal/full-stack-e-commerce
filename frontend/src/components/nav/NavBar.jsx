@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import style from './nav.module.css';
 const NavBar = () => {
+  const isAdmin = false;
   const linksArray = [
     { href: '/ ', text: 'Home' },
     { href: '/', text: 'Men' },
